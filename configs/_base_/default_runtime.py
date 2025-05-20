@@ -46,7 +46,7 @@ default_hooks = dict(
     #     backend_args (dict, optional): Arguments to instantiate the
     #         corresponding backend. Defaults to None.
     # """
-    visualization=dict(type="DetVisualizationHook"),
+    visualization=dict(type="DetVisualizationHook", draw=True, test_out_dir='./test_out_dir'),
 )
 
 # Runtime configuration

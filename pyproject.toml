@@ -1,0 +1,93 @@
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "A",    # flake8-builtins
+    "B",    # flake8-bugbear
+    "C90",  # mccabe
+    "COM",  # flake8-commas
+    "D",    # pydocstyle
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "PIE",  # flake8-pie
+    "PT",   # flake8-pytest-style
+    "RUF",  # Ruff-specific rules
+    "S",    # flake8-bandit
+    "SIM",  # flake8-simplify
+    "T20",  # flake8-print
+    "TCH",  # flake8-type-checking
+    "UP",   # pyupgrade
+    "W",    # pycodestyle warnings
+]
+ignore = [
+    "D203",  # Conflicts with D211 (no blank line before class)
+    "D213",  # Conflicts with D212 (multi-line summary should start at first line)
+    "E501",  # Line too long (handled by formatter)
+    "B008",  # Do not perform function call in argument defaults
+    "C901",  # Function is too complex
+]
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+
+[tool.ruff.lint.per-file-ignores]
+"**/*.ipynb" = ["ALL"]
+"**/tests/**/*.py" = [
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+    "D103",  # Missing docstring in public function
+    "D104",  # Missing docstring in public package
+    "D107",  # Missing docstring in __init__
+    "S101",  # Use of `assert`
+    "SLF001",  # Private member access
+    "ARG001",  # Unused argument
+    "PLR2004",  # Magic number used in comparison
+]
+"tests/**/*.py" = [
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+    "D103",  # Missing docstring in public function
+    "D104",  # Missing docstring in public package
+    "D107",  # Missing docstring in __init__
+    "S101",  # Use of `assert`
+    "SLF001",  # Private member access
+    "ARG001",  # Unused argument
+    "PLR2004",  # Magic number used in comparison
+]
+"*_cfg.py" = [
+    "D100",  # Missing docstring in public module
+]
+"tools/*.py" = ["ALL"] # TODO: configure stricter rules for tools
+"build/**/*py" = ["ALL"]
+".dev_scripts/**/*.py" = ["ALL"]  # Ignore all rules for .dev_scripts files
+"models/example_project/**/*.py" = ["ALL"] # Ignore all rules for example code
+"apps/BentoMLflow/**/*.py" = ["ALL"]
+"apps/BentoResnet/**/*.py" = ["ALL"]
+"apps/BentoYolo/**/*.py" = ["ALL"]
+"libs/**/*.py" = ["ALL"]
+"**/*_cfg.py" = [
+    "RUF003",  # Comment contains ambiguous ` ` (NO-BREAK SPACE)
+]
+
+[tool.pytest.ini_options]
+python_files = "tests.py test_*.py *_test.py"
+python_functions = "test_*"
+python_classes = "Test*"
+testpaths = ["tests"]
+addopts = "-sv --color=yes --cov=. --cov-report=term-missing --cov-report=xml --cov-report=html"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning",
+]

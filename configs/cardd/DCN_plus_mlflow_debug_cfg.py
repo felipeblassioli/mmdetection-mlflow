@@ -79,16 +79,31 @@ param_scheduler = [
 ]
 
 # Logging and visualization configuration
+# See: https://mlflow.org/docs/latest/getting-started/logging-first-model/step3-create-experiment/
+# Provide an Experiment description that will appear in the UI
+experiment_description = (
+    "This is a Car Damage Detection experiment."
+    "This experiment trains on unmodified CarDD public dataset."
+)
+
+# Provide searchable tags that define characteristics of the Runs that
+# will be in this Experiment
+experiment_tags = {
+    "project_name": "barad-dur",
+    "team": "tiopatinhas",
+    "mlflow.note.content": experiment_description,
+}
+
 vis_backends = [
     dict(type="LocalVisBackend", save_dir="./vis_output"),
-    # dict(
-    #     type='MLflowVisBackend',
-    #     save_dir='temp_dir',
-    #     exp_name='DCN-plus',
-    #     run_name='mask-rcnn_r101-dconv-c3-c5_fpn_1x_coco',
-    #     tags=None,
-    #     params=None,
-    #     tracking_uri='http://localhost:5000',
-    #     artifact_suffix=['.json', '.log', '.py', 'yaml'])
+    dict(
+        type='MLflowVisBackend',
+        save_dir='temp_dir',
+        exp_name='cardd-DCN+',
+        run_name='mask-rcnn_r101-dconv-c3-c5_fpn_1x_coco',
+        tags=experiment_tags,
+        params=None,
+        tracking_uri='https://mlflow-t-secure-prod-910506685608.us-central1.run.app',
+        artifact_suffix=['.json', '.log', '.py', 'yaml'])
 ]
 visualizer = dict(type="DetLocalVisualizer", vis_backends=vis_backends, name="visualizer")

@@ -60,7 +60,8 @@ train_dataloader = dict(
     batch_size=2,
     num_workers=2,
     persistent_workers=True,
-    sampler=dict(type="DefaultSampler", shuffle=True),
+    #sampler=dict(type="DefaultSampler", shuffle=True),
+    sampler=dict(type="SubsetSampler", shuffle=True, subset_ratio=0.1, seed=42),
     batch_sampler=dict(type="AspectRatioBatchSampler"),
     dataset=dict(
         type=dataset_type,
@@ -79,7 +80,8 @@ val_dataloader = dict(
     num_workers=2,
     persistent_workers=True,
     drop_last=False,
-    sampler=dict(type="DefaultSampler", shuffle=False),
+    #sampler=dict(type="DefaultSampler", shuffle=False),
+    sampler=dict(type="SubsetSampler", shuffle=True, subset_ratio=0.1, seed=42),
     dataset=dict(
         type=dataset_type,
         data_root=DATA_ROOT,
@@ -97,7 +99,8 @@ test_dataloader = dict(
     num_workers=2,
     persistent_workers=True,
     drop_last=False,
-    sampler=dict(type="DefaultSampler", shuffle=False),
+    # sampler=dict(type="DefaultSampler", shuffle=False),
+    sampler=dict(type="SubsetSampler", shuffle=True, subset_ratio=0.1, seed=42),
     dataset=dict(
         type=dataset_type,
         data_root=DATA_ROOT,

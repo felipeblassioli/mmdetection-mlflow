@@ -8,6 +8,10 @@ from mmengine.config import Config, DictAction
 from mmengine.registry import RUNNERS
 from mmengine.runner import Runner
 
+import mlflow
+mlflow.pytorch.autolog(log_every_n_step=1)
+
+import custom_sampler
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
